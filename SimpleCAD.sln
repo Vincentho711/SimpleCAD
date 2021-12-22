@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleCAD", "SimpleCAD\SimpleCAD.vcxproj", "{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Debug|x64.ActiveCfg = Debug|x64
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Debug|x64.Build.0 = Debug|x64
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Debug|x86.ActiveCfg = Debug|Win32
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Debug|x86.Build.0 = Debug|Win32
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Release|x64.ActiveCfg = Release|x64
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Release|x64.Build.0 = Release|x64
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Release|x86.ActiveCfg = Release|Win32
+		{4F7518B0-0BEB-4DF1-A75F-F77ABF083CD8}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B5153F5-822B-4A67-99B7-68581A2C9155}
+	EndGlobalSection
+EndGlobal
