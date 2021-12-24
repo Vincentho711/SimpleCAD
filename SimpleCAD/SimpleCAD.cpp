@@ -51,6 +51,19 @@ struct sShape
 		return &vecNodes[vecNodes.size() - 1];
 	}
 
+	// Check if a node is an existing node
+	sNode* HitNode(olc::vf2d& p)
+	{
+		for (auto& n : vecNodes)
+		{
+			if ((p - n.pos).mag() < 0.01f)
+			{
+				return &n;
+			}
+		}
+		return nullptr;
+	}
+
 	void DrawNodes(olc::PixelGameEngine *pge)
 	{
 		for (auto &n : vecNodes)
@@ -87,6 +100,30 @@ struct sLine : public sShape
 		WorldToScreen(vecNodes[1].pos, ex, ey);
 		// Draw line with method in pge object
 		pge->DrawLine(sx, sy, ex, ey,col);
+	}
+};
+
+// Box struct, inherits from sSHape struct
+struct sBox : public sShape
+{
+	// Constructor
+	sBox()
+	{
+		nMaxNodes = 2;
+		// GetNextNodes() returns a pointer to a vector element which is bad
+		// However, we can reserve memory space to prevent memory fragmentation
+		vecNodes.reserve(nMaxNodes);
+	}
+
+	// Own implementation of DrawYourself() to override virtual method in sShape
+	void DrawYourself(olc::PixelGameEngine* pge) override
+	{
+		int sx, sy, ex, ey;
+		// Convert coordinates of vecNodes in WorldSpace to Screen Space
+		WorldToScreen(vecNodes[0].pos, sx, sy);
+		WorldToScreen(vecNodes[1].pos, ex, ey);
+		// Draw rectangle with method in pge object
+		pge->DrawRect(sx, sy, ex - sx, ey - sy, col);
 	}
 };
 
@@ -186,6 +223,42 @@ public:
 			selectedNode = tempShape->GetNextNode(vCursor);
 		}
 
+		// User interaction to draw box
+		if (GetKey(olc::Key::B).bPressed)
+		{
+			tempShape = new sBox();
+			// Place first node at the location of keypress
+			selectedNode = tempShape->GetNextNode(vCursor);
+
+			// Get Second Node with mouse
+			selectedNode = tempShape->GetNextNode(vCursor);
+		}
+		
+		// Use M key to move node under the cursor
+		if (GetKey(olc::Key::M).bPressed)
+		{
+			selectedNode = nullptr;
+			// Iterate through all shapes in listShapes and see if Cursor 
+			// is pointing at an existing node. If yes, set it to selectedNode
+			for (auto &shape : listShapes)
+			{
+				selectedNode = shape->HitNode(vCursor);
+				
+				if (selectedNode != nullptr)
+				{
+					break;
+				}
+			}
+
+		}
+
+		// Use right click to cancel drawing process after a node has been placed
+		if  (tempShape != nullptr && GetMouse(1).bReleased)
+		{
+			tempShape->vecNodes.pop_back();
+			tempShape = nullptr;
+		}
+
 		if (selectedNode != nullptr)
 		{
 			// Set the pos of selectedNode to the snapped vCursor location
@@ -203,7 +276,7 @@ public:
 				{
 					tempShape->col = olc::WHITE;
 					listShapes.push_back(tempShape);
-					tempShape = nullptr; // Thanks @howlevergreen /Disord
+					tempShape = nullptr;
 				}
 
 			}
