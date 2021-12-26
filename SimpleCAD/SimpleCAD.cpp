@@ -127,6 +127,34 @@ struct sBox : public sShape
 	}
 };
 
+// Box struct, inherits from sSHape struct
+struct sCircle : public sShape
+{
+	// Constructor
+	sCircle()
+	{
+		nMaxNodes = 2;
+		// GetNextNodes() returns a pointer to a vector element which is bad
+		// However, we can reserve memory space to prevent memory fragmentation
+		vecNodes.reserve(nMaxNodes);
+	}
+
+	// Own implementation of DrawYourself() to override virtual method in sShape
+	void DrawYourself(olc::PixelGameEngine* pge) override
+	{
+		float fRadius = (vecNodes[0].pos - vecNodes[1].pos).mag();
+		// Draw dash line to represent radius
+		int sx, sy, ex, ey;
+		// Convert coordinates of vecNodes in WorldSpace to Screen Space
+		WorldToScreen(vecNodes[0].pos, sx, sy);
+		WorldToScreen(vecNodes[1].pos, ex, ey);
+		// Draw radius line method in pge object
+		pge->DrawLine(sx, sy, ex , ey, col, 0xFF00FF00);
+		// Draw circle
+		pge->DrawCircle(sx, sy, fRadius * fWorldScale, col);
+	}
+};
+
 class Example : public olc::PixelGameEngine {
 public:
 	Example() {
@@ -227,6 +255,17 @@ public:
 		if (GetKey(olc::Key::B).bPressed)
 		{
 			tempShape = new sBox();
+			// Place first node at the location of keypress
+			selectedNode = tempShape->GetNextNode(vCursor);
+
+			// Get Second Node with mouse
+			selectedNode = tempShape->GetNextNode(vCursor);
+		}
+
+		// User interaction to draw circle
+		if (GetKey(olc::Key::C).bPressed)
+		{
+			tempShape = new sCircle();
 			// Place first node at the location of keypress
 			selectedNode = tempShape->GetNextNode(vCursor);
 
