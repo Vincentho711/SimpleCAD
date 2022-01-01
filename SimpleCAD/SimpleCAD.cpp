@@ -73,6 +73,13 @@ struct sShape
 			pge->FillCircle(sx, sy, 2, olc::RED);
 		}
 	}
+
+	void DeleteShape(olc::PixelGameEngine *pge)
+	{
+		// Remove all vecNodes in the shape
+		this->vecNodes.clear();
+		
+	}
 };
 
 // Initialise static members of sShape
@@ -243,6 +250,9 @@ private:
 
 	// "Snapped" mouse location
 	olc::vf2d vCursor = { 0, 0 };
+	
+	// Delete mode flag
+	bool in_delete_mode = false;
 
 
 public:
@@ -344,10 +354,27 @@ public:
 				
 				if (selectedNode != nullptr)
 				{
-					break;
+					
 				}
 			}
 
+		}
+
+		// Use D key to remove shape under the cursor
+		if (GetKey(olc::Key::D).bPressed)
+		{
+			selectedNode = nullptr;
+			// Iterate through all shapes in listShapes and see if cursor
+			// is pointing to an existing node. If yes, set it to selectedNode
+			for (auto &shape : listShapes)
+			{
+				selectedNode = shape->HitNode(vCursor);
+				if (selectedNode != nullptr)
+				{
+					in_delete_mode = true;
+					break;
+				}
+			}
 		}
 
 		// Use right click to cancel drawing process after a node has been placed
@@ -357,10 +384,26 @@ public:
 			tempShape = nullptr;
 		}
 
+		// Check if there is a selectedNode
 		if (selectedNode != nullptr)
 		{
-			// Set the pos of selectedNode to the snapped vCursor location
-			selectedNode->pos = vCursor;
+			// If it is delete mode activated by Key D, delete the shape
+			if (in_delete_mode)
+			{
+				sShape* parent_shape = selectedNode->parent;
+				parent_shape->DeleteShape(this);
+				// Remove shape from listShapes
+				listShapes.remove(parent_shape);
+				// Reset delete mode back to false
+				in_delete_mode = false;
+			}
+			// Else, we are in modify node mode or we want to add new node
+			else
+			{
+				// Set the pos of selectedNode to the snapped vCursor location
+				selectedNode->pos = vCursor;
+			}
+			
 		}
 
 		// Place the next node when left mouse is pressed
