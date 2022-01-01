@@ -354,7 +354,7 @@ public:
 				
 				if (selectedNode != nullptr)
 				{
-					
+					break;
 				}
 			}
 
