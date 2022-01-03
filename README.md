@@ -33,7 +33,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Vincentho711/SimpleCAD">
-    <img src="images/SimpleCAD_logo.png" alt="Logo" width="470" height="150">
+    <img src="images/SimpleCAD_logo.PNG" alt="Logo" width="470" height="150">
   </a>
 
   <h3 align="center">SimpleCAD</h3>
