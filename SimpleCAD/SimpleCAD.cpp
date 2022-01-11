@@ -254,6 +254,11 @@ private:
 	// Delete mode flag
 	bool in_delete_mode = false;
 
+	// Colour map
+	int col_counter = 0;
+	olc::Pixel col_map[5] = { olc::GREEN ,olc::RED ,olc::BLACK ,olc::MAGENTA ,olc::WHITE };
+	olc::Pixel col_selected;
+
 
 public:
 	bool OnUserCreate() override {
@@ -377,12 +382,26 @@ public:
 			}
 		}
 
+		// Use spacebar to change line colours
+		if (GetKey(olc::Key::SPACE).bPressed)
+		{
+			col_counter++;
+			std::cout << col_counter << std::endl;
+			if (col_counter >= 5)
+			{
+				col_counter = 0;
+			}
+			col_selected = col_map[col_counter];
+		
+		}
+
 		// Use right click to cancel drawing process after a node has been placed
 		if  (tempShape != nullptr && GetMouse(1).bReleased)
 		{
 			tempShape->vecNodes.pop_back();
 			tempShape = nullptr;
 		}
+
 
 		// Check if there is a selectedNode
 		if (selectedNode != nullptr)
@@ -415,7 +434,7 @@ public:
 				selectedNode = tempShape->GetNextNode(vCursor);
 				if (selectedNode == nullptr)
 				{
-					tempShape->col = olc::WHITE;
+					tempShape->col = col_selected;
 					listShapes.push_back(tempShape);
 					tempShape = nullptr;
 				}
