@@ -129,6 +129,7 @@ the supported shapes and features are:
 - Spline/ curve: `s` key
 - Modify shapes: Put cursor on node to be modified, then press `m` key
 - Delete shapes: Put cursor on a node of the shape to be deleted, then press `d` key
+- Change colour: There are currently 5 colour presets (GREEN, RED, BLACK, MAGENTA and WHITE), press `space` to cycle between them
 
 _[Documentation](https://example.com)_ is coming up!
 
