@@ -258,8 +258,9 @@ private:
 
 	// Colour map
 	int col_counter = 0;
-	olc::Pixel col_map[5] = { olc::GREEN ,olc::RED ,olc::BLACK ,olc::MAGENTA ,olc::WHITE };
+	olc::Pixel col_map[6] = { olc::GREEN ,olc::RED ,olc::BLACK ,olc::MAGENTA ,olc::WHITE, olc::YELLOW};
 	olc::Pixel col_selected;
+	int col_map_size = sizeof(col_map) / sizeof(col_map[0]);
 
 
 public:
@@ -391,8 +392,7 @@ public:
 		if (GetKey(olc::Key::SPACE).bPressed)
 		{
 			col_counter++;
-			std::cout << col_counter << std::endl;
-			if (col_counter >= 5)
+			if (col_counter >= col_map_size)
 			{
 				col_counter = 0;
 			}
