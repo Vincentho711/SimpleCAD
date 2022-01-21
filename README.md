@@ -123,12 +123,15 @@ Before using this library, ensure you have an IDE and the relevent C++ compiler 
 
 A separate window will pop up once it is running. You can draw shapes, lines and curves by pressing keys. Currently
 the supported shapes and features are:
+- Zoom in: `q` key/ Scroll up
+- Zoom out: `a` key/ Scroll down
 - Lines: `l` key
 - Boxes: `b` key
 - Circles: `c` key
 - Spline/ curve: `s` key
 - Modify shapes: Put cursor on node to be modified, then press `m` key
 - Delete shapes: Put cursor on a node of the shape to be deleted, then press `d` key
+- Change colour: There are currently 6 colour presets (GREEN, RED, BLACK, MAGENTA, WHITE and YELLOW), press `space` to cycle between them
 
 _[Documentation](https://example.com)_ is coming up!
 
@@ -144,18 +147,18 @@ See the [open issues](https://github.com/Vincentho711/SimpleCAD/issues) for a li
 | Status | Milestone | Goals | ETA |
 | :---: | :--- | :---: | :---: |
 | ✅ | **[Implement the ability to delete shapes]** | 1 / 1 | 01 Jan 2022 |
-| 🚧 | **[Implement the ability to select multiple shapes]** | 0 / 1 | 20 Jan 2022 |
+| ✅ | **[Implement the ability to change line colours]** | 1 / 1 | 20 Jan 2022 |
 
 ### Implement the ability to delete shapes
 
 > This milestone will be done when 
 * Shapes can be deleted
 
-### Implement the ability to select multiple shapes
+### Implement the ability to change line colours
 
 > This milestone will be done when 
-* Shapes can be selected with visual confirmation
-* Actions can be made after selection
+* Lines are drawn with colours
+* Multiple colours are avaliable to be chosen from
 
 
 <!-- CONTRIBUTING -->

@@ -3,6 +3,8 @@
 //
 #define OLC_PGE_APPLICATION
 //#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include "olcPixelGameEngine.h"
 
 // Forward Declaration
@@ -256,14 +258,18 @@ private:
 
 	// Colour map
 	int col_counter = 0;
-	olc::Pixel col_map[5] = { olc::GREEN ,olc::RED ,olc::BLACK ,olc::MAGENTA ,olc::WHITE };
+	olc::Pixel col_map[6] = { olc::GREEN ,olc::RED ,olc::BLACK ,olc::MAGENTA ,olc::WHITE, olc::YELLOW};
 	olc::Pixel col_selected;
+	int col_map_size = sizeof(col_map) / sizeof(col_map[0]);
 
 
 public:
 	bool OnUserCreate() override {
 		// Configure world space (0,0) to be middle of screen space
 		vOffset = { (float)(-ScreenWidth() / 2) / fScale, (float)(-ScreenHeight() / 2) / fScale };
+
+		// Initiliase first colour
+		col_selected = col_map[col_counter];
 		return true;
 	}
 	bool OnUserUpdate(float fElapsedTime) override {
@@ -386,8 +392,7 @@ public:
 		if (GetKey(olc::Key::SPACE).bPressed)
 		{
 			col_counter++;
-			std::cout << col_counter << std::endl;
-			if (col_counter >= 5)
+			if (col_counter >= col_map_size)
 			{
 				col_counter = 0;
 			}
@@ -504,8 +509,20 @@ public:
 		WorldToScreen(vCursor, sx, sy);
 		DrawCircle(sx, sy, 3,olc::YELLOW);
 
-		//Draw cursor location
-		DrawString(15, 15, "X=" + std::to_string(vCursor.x) + ", Y=" + std::to_string(-vCursor.y), olc::YELLOW,2);
+		// Draw cursor location
+		std::stringstream stream;
+		// Convert to 2 d.p
+		stream << std::fixed << std::setprecision(2) << vCursor.x;
+		std::string cursor_x = stream.str();
+		stream.str("");
+		stream.clear();
+		stream << std::fixed << std::setprecision(2) << -vCursor.y;
+		std::string cursor_y = stream.str();
+		DrawString(15, 15, "X=" + cursor_x + ", Y=" + (cursor_y) , olc::YELLOW, 2);
+
+		// Draw a circle of the colour selected
+		DrawString(15, 45, "Col=", olc::YELLOW, 2);
+		FillCircle(100, 53, 10, col_selected);
 		return true;
 	}
 };
