@@ -148,6 +148,7 @@ See the [open issues](https://github.com/Vincentho711/SimpleCAD/issues) for a li
 | :---: | :--- | :---: | :---: |
 | ✅ | **[Implement the ability to delete shapes]** | 1 / 1 | 01 Jan 2022 |
 | ✅ | **[Implement the ability to change line colours]** | 1 / 1 | 20 Jan 2022 |
+| 🚧 | **[Implement the ability to add dimensions to shapes]** | 0 / 1 | 15 Feb 2022 |
 
 ### Implement the ability to delete shapes
 
@@ -158,7 +159,12 @@ See the [open issues](https://github.com/Vincentho711/SimpleCAD/issues) for a li
 
 > This milestone will be done when 
 * Lines are drawn with colours
-* Multiple colours are avaliable to be chosen from
+* Multiple colours are available to be chosen from
+
+### Implement the ability to add dimensions to shapes
+
+> This milestone will be done when 
+* Users can add dimensions to the shape
 
 
 <!-- CONTRIBUTING -->
