@@ -530,7 +530,7 @@ public:
 int main()
 {
 	Example demo;
-	if (demo.Construct(800, 480, 1, 1, false))
+	if (demo.Construct(1920, 1080, 1, 1, false))
 		demo.Start();
 	return 0;
 }
